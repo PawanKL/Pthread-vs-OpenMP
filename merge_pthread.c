@@ -32,5 +32,31 @@ int main()
    printf("%d ",arr[i]); 
 
  }
+
+ int retval;
+ clock_t t1,t2;
+ t1 = clock();
+ 
+  retval = pthread_create(&t,NULL,mergesort_pthread,&ai);
+  if(retval) 
+  {  
+          printf("Thread Creation Failed...!! Return value is %d\n",retval);
+	  return 0;
+
+  }
+  pthread_join(t,NULL);
+ t2 = clock();
+ double t3 = (double)(t2 - t1)/CLOCKS_PER_SEC;
+ printf("\nSorted Data\n");
+ 
+ for(i=0;i<MAX;i++)
+ {
+   printf("%d ",arr[i]);
+ }
+
+ printf("\nTime Elapsed: %.5f\n",t3);
+
+ return 0;
+
 }
 
