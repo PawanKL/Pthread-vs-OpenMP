@@ -102,3 +102,37 @@ void* mergesort_pthread(void* ptr)
   merge(p->low,p->high);
   return 0;
 }
+void merge(int low,int high)
+{
+ 
+  int mid = (low + high)/2;
+  int *left = (int *)malloc(sizeof(int)*(mid - low + 1));
+  int *right = (int *)malloc(sizeof(int)*(high - mid));
+
+  int n1 = mid - low + 1, n2 = high - mid, i, j;
+ 
+    for (i = 0; i < n1; i++)
+        left[i] = arr[i + low];
+ 
+    for (i = 0; i < n2; i++)
+        right[i] = arr[i + mid + 1];
+ 
+    int k = low;
+    i = j = 0;
+ 
+    while (i < n1 && j < n2) {
+        if (left[i] <= right[j])
+            arr[k++] = left[i++];
+        else
+            arr[k++] = right[j++];
+    }
+ 
+    while (i < n1) {
+        arr[k++] = left[i++];
+    }
+ 
+    while (j < n2) {
+        arr[k++] = right[j++];
+    }
+
+}
