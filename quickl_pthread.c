@@ -88,3 +88,22 @@ void *QuickSort_pthread(void *ptr)
            return 0;
         }
 }
+int Partition(int low, int high)
+{
+  int j,i,pivot=arr[high],temp;
+  j = low - 1;
+  for(i=low;i<high;i++)
+  {
+    if(arr[i]<=pivot)
+    {
+      j++;
+      temp=arr[j];
+      arr[j]=arr[i];
+      arr[i]=temp;
+   }
+ }
+temp=arr[j+1];
+arr[j+1]=arr[high];
+arr[high]=temp;
+return (j+1);
+}
