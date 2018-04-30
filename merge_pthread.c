@@ -59,4 +59,46 @@ int main()
  return 0;
 
 }
+void* mergesort_pthread(void* ptr)
+{
+   struct ArrayIndex *p = (struct ArrayIndex *)ptr;
+   struct ArrayIndex a1,a2;
 
+   int mid = (p->low + p->high)/2;
+
+   pthread_t t1,t2;
+   int retval;
+
+   a1.low = p->low;
+   a1.high = mid;
+
+   a2.low = mid + 1;
+   a2.high = p->high;  
+
+  if(p->low >= p->high)
+  {
+    return 0;
+  } 
+   
+   retval = pthread_create(&t1,NULL,mergesort_pthread,&a1);
+   if(retval) 
+   {  
+          printf("Thread Creation Failed...!! Return value is %d\n",retval);
+	  return 0;
+
+   }
+
+   retval = pthread_create(&t2,NULL,mergesort_pthread,&a2);
+   if(retval) 
+   {  
+          printf("Thread Creation Failed...!! Return value is %d\n",retval);
+	  return 0;
+
+   }	
+
+  pthread_join(t1,NULL);
+  pthread_join(t2,NULL);
+  
+  merge(p->low,p->high);
+  return 0;
+}
