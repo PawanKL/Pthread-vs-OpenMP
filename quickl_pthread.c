@@ -50,4 +50,41 @@ int main()
 
   return 0;
 }
+void *QuickSort_pthread(void *ptr)
+{
+	struct ArrayIndex *p = (struct ArrayIndex*)ptr;
+	int start=p->low;
+	int end=p->high;
+	if(start<end)
+        {
+	   int i,p = Partition(start,end);
+	   pthread_t t1,t2;
+	   struct ArrayIndex a1,a2;
+	   a1.low=start;
+	   a1.high=p-1;
+	   a2.low=p+1;
+	   a2.high=end;
+	   int retval;
 
+	   retval = pthread_create(&t1,NULL,QuickSort_pthread,&a1);
+	   if(retval) 
+	   {  
+             printf("Thread Creation Failed...!! Return value is %d\n",retval);		  	       return 0;
+           }
+
+           retval = pthread_create(&t2,NULL,QuickSort_pthread,&a2);
+           if(retval) 
+           {  
+              printf("Thread Creation Failed...!! Return value is %d\n",retval);
+	      return 0;
+
+           }	
+           pthread_join(t1,NULL);
+           pthread_join(t2,NULL);
+           return 0;
+        }
+        else
+        {
+           return 0;
+        }
+}
