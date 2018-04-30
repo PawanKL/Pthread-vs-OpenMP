@@ -23,3 +23,23 @@ int partition (int arr[], int low, int high)
     arr[i-1] = temp;
     return (i-1);
 }
+void quickSort(int arr[], int low, int high)
+{
+    if (low < high)
+    {
+        /* pi is partitioning index, arr[p] is now
+           at right place */
+        int pi = partition(arr, low, high);
+ 
+        // Separately sort elements before
+        // partition and after partition
+	#pragma omp parallel sections num_threads(2)
+	{
+		#pragma omp section 
+        	quickSort(arr, low, pi - 1);
+		#pragma omp section
+        	quickSort(arr, pi + 1, high);
+	}
+    }
+}
+
