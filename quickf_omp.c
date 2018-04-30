@@ -50,5 +50,23 @@ void printArray(int arr[], int size)
         printf("%d ", arr[i]);
     printf("\n");
 }
+// Driver program to test above functions
+int main()
+{
+    int arr[MAX],i;
+    srand(time(NULL));
+    for(i=0;i<MAX;i++){
+     arr[i] = rand() % MAX;
+    }
+    clock_t t1,t2;
+    t1 = clock();
+    quickSort(arr, 0, MAX-1);
+    t2 = clock();
+    double t_time = (double)(t2-t1)/CLOCKS_PER_SEC;
+    printf("Sorted array: n");
+    printArray(arr, MAX);
+    printf("\t\tTime Elapsed: %.5f\n",t_time);
+    return 0;
+}
 
 
