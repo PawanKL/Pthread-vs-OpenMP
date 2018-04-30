@@ -81,3 +81,12 @@ void mergeSort(int arr[], int l, int r)
         merge(arr, l, m, r);
     }
 }
+/* UTILITY FUNCTIONS */
+/* Function to print an array */
+void printArray(int arr[], int size)
+{
+    int i;
+    for (i=0; i < size; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
