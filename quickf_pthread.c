@@ -13,16 +13,6 @@ int high;
 int main()
 {
    int i,retval;
-   printf("\n");
-   clock_t t1,t2;
-   pthread_t thread;
-   struct ArrayIndex ai;
-   ai.low = 0;
-   ai.high = MAX - 1;
-
-   // Generating Random values..   
-
-
    srand(time(NULL));
    printf("Unsorted Data\n");
    for(i=0;i<MAX;i++)
@@ -30,4 +20,30 @@ int main()
 	arr[i]=rand() % MAX;
 	printf("%d ",arr[i]);
    }
+   printf("\n");
+   pthread_t thread;
+   struct ArrayIndex ai;
+   ai.low = 0;
+   ai.high = MAX - 1;
+   clock_t t1,t2;
+   t1 = clock();
+   retval = pthread_create(&thread,NULL,QuickSort_pthread,&ai);
+   if(retval) 
+   {  
+          printf("Thread Creation Failed...!! Return value is %d\n",retval);
+	  return 0;
+
+   }
+   pthread_join(thread,NULL);
+   t2 = clock();
+   double t = (double)(t2 - t1)/CLOCKS_PER_SEC;
+   printf("Sorted Data\n");
+   for(i=0;i<MAX;i++)
+   {
+     printf("%d ",arr[i]);
+   }
+  printf("\nTime Elapsed: %.5f\n",t);
+   
+  return 0;
+
 }
