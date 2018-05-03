@@ -2,7 +2,7 @@
 ##### Contributors:
 Pawan Kumar K16-3965 Inseya Batool K15-2265
 ## Introduction
-Parallel programming is about dividing a program into multiple sub programs and each program will be run on separate processor or core. Each core have multiple threads the problem is to divide the task into multiple tasks so that they can run concurrently on different threads. We used parallel programming model and apply it on sorting algorithms which Merge sort, Quick sort.
+Parallel programming is about dividing a program into multiple sub programs and each program will be run on separate processor or core. Each core have multiple threads the problem is to divide the task into multiple tasks so that they can run concurrently on different threads. We have used parallel programming model and apply it on sorting algorithms which are Merge sort, Quick sort.
 
 A sorting algorithm is a method for reorgaizing a large number of items into a specific order, such as alphabetical, highest-to-lowest value or shortest-to-longest distance. Sorting Algorithms like merge sort and quick sort and radix sort can be run parallel
 by using data parallelism and Task parallelism. We have used Data parallelsim by dividing a huge array into sub arrrays and perform sort in individual array concurrently.
@@ -27,7 +27,7 @@ and *pthread.c* with *omp.c*
 
 ## Explanation
 
-In OpenMp version we used Section clause which defines how many sections will be run in parallel. In both merge and quick sort we have define two sections running parallel. One for the half part of the array and other for remaining part of array which they will be further divided in sub parts.
+In OpenMp version we have used Section clause which defines how many sections will be run in parallel. In both merge and quick sort we have define two sections running parallel. One for the half part of the array and other for remaining part of array which they will be further divided in sub parts.
 
 In Pthread version we create one main thread for execution of two local threads running parallel. In both merge and quick sort we create one main thread and two local threads and two local threads wil be created simultaneously for each recursive call. One for the half part of the array and other for remaining part of array which they will be further divided in sub parts.
 
